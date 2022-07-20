@@ -7,7 +7,7 @@
 # Load MRIP effort data from online query tool #####################################
 ##
 
-MRIP = read.csv("Data/MRIP query_effort_81_21_GOM by state_private_by area.csv")
+MRIP = read.csv("Data/Raw//MRIP query_effort_81_21_GOM by state_private_by area.csv")
 summary(MRIP)
 
 # The MRIP data is effort in angler trips for each GOM state by fishing area, private/rental boats only, 1981-2021
