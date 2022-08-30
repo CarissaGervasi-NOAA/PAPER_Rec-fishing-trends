@@ -1,3 +1,4 @@
+
 # NOAA Red Snapper Participatory Modeling Project 2022 ##############
 # Carissa Gervasi, Mandy Karnauskas, Matt McPherson
 
@@ -6,49 +7,37 @@
 # Load MRIP effort data from online query tool #####################################
 ##
 
-MRIP = read.csv("../../NOAA Data/PUBLIC/PAPER_Rec-fishing-trends/Raw/MRIP query_effort_81_21_GOM by state_by mode_by area.csv")
+MRIP = read.csv("../../NOAA Data/PUBLIC/PAPER_Rec-fishing-trends/Raw/MRIP query_effort_81_21_GOM by state_private_by area.csv")
 summary(MRIP)
 
-MRIP$State = as.factor(MRIP$State)
-MRIP$Fishing.Mode = as.factor(MRIP$Fishing.Mode)
-MRIP$Fishing.Area = as.factor(MRIP$Fishing.Area)
-
-
-# The MRIP data is effort in angler trips for each GOM state by fishing area and by mode, 1981-2021
-
-
-# What are we really interested in? We want to know why recreational anglers fish. Charter and private anglers likely have different motivations. So let's just look at private anglers. Since we are mainly concerned with red snapper, those fish are not being caught from shore. So we really just want the private/rental boat fishing mode. For fishing area, we probably want to remove inland. 
-
-MRIP2 = MRIP %>% 
-  filter(Fishing.Mode == "PRIVATE/RENTAL BOAT") %>% 
-  filter(Fishing.Area != "INLAND")
-MRIP2 = droplevels(MRIP2)
-summary(MRIP2)
-
-MRIP2$Fishing.Area2 = as.factor(MRIP2$Fishing.Area)
-levels(MRIP2$Fishing.Area2) = list("State" = c("OCEAN (<= 10 MI)", "OCEAN (<= 3 MI)"),
-                                   "Federal" = c("OCEAN (> 10 MI)", "OCEAN (> 3 MI)"))
-
 #Remove data points with PSE > 50
-library(dplyr)
-MRIP2 = MRIP2 %>% 
+MRIP = MRIP %>% 
   filter(PSE < 50)
 
+# The MRIP data is effort in angler trips for each GOM state by fishing area, private/rental boats only, 1981-2021
 
-# Plot everything
+# First let's look at the overall trend
 
-MRIP2$effort2 = MRIP2$Angler.Trips/1000000
+library(dplyr)
+
+MRIP.all = MRIP %>% 
+  group_by(Year) %>% 
+  summarize(effort = sum(Angler.Trips))
+
+head(MRIP.all)
+str(MRIP.all)
+MRIP.all$effort2 = MRIP.all$effort/1000000
+
 library(ggplot2)
 
-pdf("Plots/MRIP rec effort by area and state private boats only.pdf", width = 8, height = 5)
-ggplot(MRIP2, aes(x=Year, y=effort2, colour=Fishing.Area2)) +
+pdf("Plots/MRIP rec effort all GOM.pdf", width = 8, height = 5)
+ggplot(MRIP.all, aes(x=Year, y=effort2)) +
   geom_point() +
   geom_line() +
-  facet_wrap(.~State, scales="free_y") +
   theme_bw() +
   labs(x="Year", y="Recreational effort (million angler trips)") +
-  scale_x_continuous(breaks=seq(1980,2021,5)) +
-  #scale_y_continuous(breaks=seq(0,20,1)) +
+  scale_x_continuous(breaks=seq(1980,2022,2)) +
+  scale_y_continuous(breaks=seq(10,40,1)) +
   theme(axis.title.x = element_text(vjust=-2),
         axis.title.y = element_text(vjust=5)) + 
   theme(plot.margin = unit(c(0.5,0.8,1,1), "cm"))
@@ -56,43 +45,32 @@ dev.off()
 
 
 
+# Now let's break down the data by state and by area
 
-# Plot state and federal waters together
-
-MRIP3 = MRIP2 %>% 
-  group_by(Year, State) %>% 
-  summarize(tottrips = sum(effort2))
+MRIP$Area2 = as.factor(MRIP$Fishing.Area)
+levels(MRIP$Area2)
+levels(MRIP$Area2) = list("Inshore" = c("INLAND"), "State" = c("OCEAN (<= 10 MI)","OCEAN (<= 3 MI)"), "Federal" = c("OCEAN (> 10 MI)","OCEAN (> 3 MI)"))
 
 
-pdf("Plots/MRIP rec effort by state private boats only.pdf", width = 8, height = 5)
-ggplot(MRIP3, aes(x=Year, y=tottrips)) +
+MRIP$State = as.factor(MRIP$State)
+levels(MRIP$State)
+
+MRIP$effort2 = MRIP$Angler.Trips/1000000
+
+
+pdf("Plots/MRIP rec effort by area and state.pdf", width = 8, height = 5)
+ggplot(MRIP, aes(x=Year, y=effort2, colour=Area2)) +
   geom_point() +
   geom_line() +
-  geom_smooth() +
   facet_wrap(.~State, scales="free_y") +
   theme_bw() +
   labs(x="Year", y="Recreational effort (million angler trips)") +
-  scale_x_continuous(breaks=seq(1980,2021,5)) +
+  scale_x_continuous(breaks=seq(1980,2022,5)) +
   #scale_y_continuous(breaks=seq(0,20,1)) +
   theme(axis.title.x = element_text(vjust=-2),
         axis.title.y = element_text(vjust=5)) + 
   theme(plot.margin = unit(c(0.5,0.8,1,1), "cm"))
 dev.off()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
