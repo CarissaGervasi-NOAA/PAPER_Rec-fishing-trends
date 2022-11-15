@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.20">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Carissa Gervasi">
+
+<title>1. Examine MRIP effort data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="1. Examine MRIP effort data_files/libs/clipboard/clipboard.min.js"></script>
+<script src="1. Examine MRIP effort data_files/libs/quarto-html/quarto.js"></script>
+<script src="1. Examine MRIP effort data_files/libs/quarto-html/popper.min.js"></script>
+<script src="1. Examine MRIP effort data_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="1. Examine MRIP effort data_files/libs/quarto-html/anchor.min.js"></script>
+<link href="1. Examine MRIP effort data_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="1. Examine MRIP effort data_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="1. Examine MRIP effort data_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="1. Examine MRIP effort data_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="1. Examine MRIP effort data_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">1. Examine MRIP effort data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Carissa Gervasi </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="noaa-red-snapper-participatory-modeling-project-2022" class="level2">
+<h2 class="anchored" data-anchor-id="noaa-red-snapper-participatory-modeling-project-2022">NOAA Red Snapper Participatory Modeling Project 2022</h2>
+<section id="trends-in-recreational-fishing-effort-in-the-gom-paper" class="level3">
+<h3 class="anchored" data-anchor-id="trends-in-recreational-fishing-effort-in-the-gom-paper">Trends in recreational fishing effort in the GOM paper</h3>
+<section id="load-packages" class="level4">
+<h4 class="anchored" data-anchor-id="load-packages">Load packages</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-mrip-effort-data-from-online-query-tool" class="level4">
+<h4 class="anchored" data-anchor-id="load-mrip-effort-data-from-online-query-tool">Load MRIP effort data from online query tool</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>MRIP <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">"../../../NOAA Data/PUBLIC/PAPER_Rec-fishing-trends/Raw/MRIP query_effort_81_21_GOM by state_by mode_by area.csv"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>MRIP<span class="sc">$</span>State <span class="ot">=</span> <span class="fu">as.factor</span>(MRIP<span class="sc">$</span>State)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>MRIP<span class="sc">$</span>Fishing.Mode <span class="ot">=</span> <span class="fu">as.factor</span>(MRIP<span class="sc">$</span>Fishing.Mode)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>MRIP<span class="sc">$</span>Fishing.Area <span class="ot">=</span> <span class="fu">as.factor</span>(MRIP<span class="sc">$</span>Fishing.Area)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(MRIP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Estimate.Status         Year              State                  Fishing.Mode
+ Length:1208        Min.   :1981   ALABAMA    :313   CHARTER BOAT       :396  
+ Class :character   1st Qu.:1990   FLORIDA    :330   PARTY/CHARTER BOAT : 50  
+ Mode  :character   Median :2000   LOUISIANA  :262   PRIVATE/RENTAL BOAT:467  
+                    Mean   :2000   MISSISSIPPI:303   SHORE              :295  
+                    3rd Qu.:2010                                              
+                    Max.   :2021                                              
+           Fishing.Area  Angler.Trips           PSE        
+ INLAND          :449   Min.   :      68   Min.   :  3.80  
+ OCEAN (&lt;= 10 MI):123   1st Qu.:   40246   1st Qu.:  8.90  
+ OCEAN (&lt;= 3 MI) :325   Median :  283380   Median : 14.90  
+ OCEAN (&gt; 10 MI) : 82   Mean   : 1673640   Mean   : 21.48  
+ OCEAN (&gt; 3 MI)  :229   3rd Qu.: 1823299   3rd Qu.: 26.65  
+                        Max.   :14516430   Max.   :114.10  </code></pre>
+</div>
+</div>
+<p>The MRIP data is effort in angler trips for each GOM state by fishing area and by mode, 1981-2021</p>
+<p>What are we really interested in? We want to know why recreational anglers fish. Charter and private anglers likely have different motivations. So let’s just look at private anglers. Since we are mainly concerned with red snapper, those fish are not being caught from shore. So we really just want the private/rental boat fishing mode. For fishing area, we probably want to remove inland.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>MRIP2 <span class="ot">=</span> MRIP <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fishing.Mode <span class="sc">==</span> <span class="st">"PRIVATE/RENTAL BOAT"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Fishing.Area <span class="sc">!=</span> <span class="st">"INLAND"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>MRIP2 <span class="ot">=</span> <span class="fu">droplevels</span>(MRIP2)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(MRIP2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Estimate.Status         Year              State                 Fishing.Mode
+ Length:313         Min.   :1981   ALABAMA    :82   PRIVATE/RENTAL BOAT:313  
+ Class :character   1st Qu.:1990   FLORIDA    :83                            
+ Mode  :character   Median :2000   LOUISIANA  :66                            
+                    Mean   :2000   MISSISSIPPI:82                            
+                    3rd Qu.:2010                                             
+                    Max.   :2021                                             
+           Fishing.Area  Angler.Trips          PSE        
+ OCEAN (&lt;= 10 MI): 41   Min.   :   3256   Min.   :  4.70  
+ OCEAN (&lt;= 3 MI) :116   1st Qu.: 145949   1st Qu.: 10.90  
+ OCEAN (&gt; 10 MI) : 41   Median : 309571   Median : 16.60  
+ OCEAN (&gt; 3 MI)  :115   Mean   :1395997   Mean   : 19.34  
+                        3rd Qu.:1655300   3rd Qu.: 23.30  
+                        Max.   :9617976   Max.   :101.50  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>MRIP2<span class="sc">$</span>Fishing.Area2 <span class="ot">=</span> <span class="fu">as.factor</span>(MRIP2<span class="sc">$</span>Fishing.Area)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(MRIP2<span class="sc">$</span>Fishing.Area2) <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"State"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"OCEAN (&lt;= 10 MI)"</span>, <span class="st">"OCEAN (&lt;= 3 MI)"</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"Federal"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"OCEAN (&gt; 10 MI)"</span>, <span class="st">"OCEAN (&gt; 3 MI)"</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove data points with PSE &gt; 50</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>MRIP2 <span class="ot">=</span> MRIP2 <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(PSE <span class="sc">&lt;</span> <span class="dv">50</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot everything</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>MRIP2<span class="sc">$</span>effort2 <span class="ot">=</span> MRIP2<span class="sc">$</span>Angler.Trips<span class="sc">/</span><span class="dv">1000000</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(MRIP2, <span class="fu">aes</span>(<span class="at">x=</span>Year, <span class="at">y=</span>effort2, <span class="at">colour=</span>Fishing.Area2)) <span class="sc">+</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(.<span class="sc">~</span>State, <span class="at">scales=</span><span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Year"</span>, <span class="at">y=</span><span class="st">"Recreational effort (million angler trips)"</span>) <span class="sc">+</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">1980</span>,<span class="dv">2021</span>,<span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scale_y_continuous(breaks=seq(0,20,1)) +</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">vjust=</span><span class="sc">-</span><span class="dv">2</span>),</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">vjust=</span><span class="dv">5</span>)) <span class="sc">+</span> </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.8</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="st">"cm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="1.-Examine-MRIP-effort-data_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    toggleBodyColorMode(window.document.querySelector("link#quarto-bootstrap"));
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

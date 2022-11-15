@@ -1,0 +1,72 @@
+---
+title: "1. Examine MRIP effort data"
+author: "Carissa Gervasi"
+format: html
+editor: visual
+execute: 
+  warning: false
+  output: true  
+  echo: true
+---
+
+## NOAA Red Snapper Participatory Modeling Project 2022
+
+### Trends in recreational fishing effort in the GOM paper
+
+#### Load packages
+
+```{r}
+library(dplyr)
+```
+
+#### Load MRIP effort data from online query tool
+
+```{r}
+MRIP = read.csv("../../NOAA Data/PUBLIC/PAPER_Rec-fishing-trends/Raw/MRIP query_effort_81_21_GOM by state_by mode_by area.csv")
+
+MRIP$State = as.factor(MRIP$State)
+MRIP$Fishing.Mode = as.factor(MRIP$Fishing.Mode)
+MRIP$Fishing.Area = as.factor(MRIP$Fishing.Area)
+
+summary(MRIP)
+```
+
+The MRIP data is effort in angler trips for each GOM state by fishing area and by mode, 1981-2021
+
+What are we really interested in? We want to know why recreational anglers fish. Charter and private anglers likely have different motivations. So let's just look at private anglers. Since we are mainly concerned with red snapper, those fish are not being caught from shore. So we really just want the private/rental boat fishing mode. For fishing area, we probably want to remove inland.
+```{r}
+MRIP2 = MRIP %>% 
+  filter(Fishing.Mode == "PRIVATE/RENTAL BOAT") %>% 
+  filter(Fishing.Area != "INLAND")
+MRIP2 = droplevels(MRIP2)
+summary(MRIP2)
+
+MRIP2$Fishing.Area2 = as.factor(MRIP2$Fishing.Area)
+levels(MRIP2$Fishing.Area2) = list("State" = c("OCEAN (<= 10 MI)", "OCEAN (<= 3 MI)"),
+                                   "Federal" = c("OCEAN (> 10 MI)", "OCEAN (> 3 MI)"))
+
+#Remove data points with PSE > 50
+library(dplyr)
+MRIP2 = MRIP2 %>% 
+  filter(PSE < 50)
+
+
+# Plot everything
+
+MRIP2$effort2 = MRIP2$Angler.Trips/1000000
+library(ggplot2)
+
+ggplot(MRIP2, aes(x=Year, y=effort2, colour=Fishing.Area2)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(.~State, scales="free_y") +
+  theme_bw() +
+  labs(x="Year", y="Recreational effort (million angler trips)") +
+  scale_x_continuous(breaks=seq(1980,2021,5)) +
+  #scale_y_continuous(breaks=seq(0,20,1)) +
+  theme(axis.title.x = element_text(vjust=-2),
+        axis.title.y = element_text(vjust=5)) + 
+  theme(plot.margin = unit(c(0.5,0.8,1,1), "cm"))
+
+```
+
