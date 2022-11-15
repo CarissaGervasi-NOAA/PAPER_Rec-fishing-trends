@@ -2,6 +2,8 @@
 # Carissa Gervasi, Mandy Karnauskas, Matt McPherson
 
 
+library(dplyr)
+
 ##
 # Load MRIP effort data from online query tool #####################################
 ##
@@ -78,6 +80,71 @@ ggplot(MRIP3, aes(x=Year, y=tottrips)) +
         axis.title.y = element_text(vjust=5)) + 
   theme(plot.margin = unit(c(0.5,0.8,1,1), "cm"))
 dev.off()
+
+write.csv(MRIP3, "../../NOAA Data/PUBLIC/PAPER_Rec-fishing-trends/Working/Total vessel trips private rec.csv")
+
+
+
+
+# Now let's look at effort just in Florida by wave (private ocean trips only)
+
+FLwave = read.csv("../../NOAA Data/PUBLIC/PAPER_Rec-fishing-trends/Raw/MRIP query_effort_81_21_WFL_private_ocean_by wave.csv")
+summary(FLwave)
+
+FLwave$Wave = as.factor(FLwave$Wave)
+
+
+#Remove data points with PSE > 50
+library(dplyr)
+FLwave2 = FLwave %>% 
+  filter(PSE < 50)
+
+
+# Plot everything
+
+FLwave2$effort2 = FLwave2$Angler.Trips/1000000
+library(ggplot2)
+
+pdf("Plots/MRIP rec effort WFL by wave.pdf", width = 10, height = 5)
+ggplot(FLwave2, aes(x=Year, y=effort2)) +
+  geom_point() +
+  geom_line() +
+  geom_smooth() +
+  facet_wrap(.~Wave, scales="free_y") +
+  theme_bw() +
+  labs(x="Year", y="Recreational effort (million angler trips)") +
+  scale_x_continuous(breaks=seq(1980,2021,5)) +
+  #scale_y_continuous(breaks=seq(0,20,1)) +
+  theme(axis.title.x = element_text(vjust=-2),
+        axis.title.y = element_text(vjust=5)) + 
+  theme(plot.margin = unit(c(0.5,0.8,1,1), "cm"))
+dev.off()
+
+
+pdf("Plots/MRIP rec effort WFL by wave just smoothers.pdf", width = 10, height = 5)
+ggplot(FLwave2, aes(x=Year, y=effort2, colour=Wave)) +
+  #geom_point() +
+  #geom_line() +
+  geom_smooth() +
+  #facet_wrap(.~Wave, scales="free_y") +
+  theme_bw() +
+  labs(x="Year", y="Recreational effort (million angler trips)") +
+  scale_x_continuous(breaks=seq(1980,2021,2)) +
+  #scale_y_continuous(breaks=seq(0,20,1)) +
+  theme(axis.title.x = element_text(vjust=-2),
+        axis.title.y = element_text(vjust=5)) + 
+  theme(plot.margin = unit(c(0.5,0.8,1,1), "cm"))
+dev.off()
+
+
+
+
+
+
+
+
+
+
 
 
 
