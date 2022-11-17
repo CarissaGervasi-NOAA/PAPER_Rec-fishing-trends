@@ -690,23 +690,25 @@ saveRDS(dfa.1.5.2, file = "DFA models/dfa.1.5.2") #abstol only
 ##
 ###
 
-setwd("G:/My Drive/FIU Dissertation (recent)/Crevalle Jack Dissertation/CHAPTER 2 state DFA/CH.2 R project MRIP")
-dfa.1.1.1 = readRDS("Data/DFA models FIM data/dfa.1.1.1")
-dfa.1.1.2 = readRDS("Data/DFA models FIM data/dfa.1.1.2")
-dfa.1.1.3 = readRDS("Data/DFA models FIM data/dfa.1.1.3")
-dfa.1.1.4 = readRDS("Data/DFA models FIM data/dfa.1.1.4")
-dfa.1.2.1 = readRDS("Data/DFA models FIM data/dfa.1.2.1")
-dfa.1.2.2 = readRDS("Data/DFA models FIM data/dfa.1.2.2")
-dfa.1.2.3 = readRDS("Data/DFA models FIM data/dfa.1.2.3")
-dfa.1.2.4 = readRDS("Data/DFA models FIM data/dfa.1.2.4")
-dfa.1.3.1 = readRDS("Data/DFA models FIM data/dfa.1.3.1")
-dfa.1.3.2 = readRDS("Data/DFA models FIM data/dfa.1.3.2")
-dfa.1.3.3 = readRDS("Data/DFA models FIM data/dfa.1.3.3")
-dfa.1.3.4 = readRDS("Data/DFA models FIM data/dfa.1.3.4")
-dfa.1.4.1 = readRDS("Data/DFA models FIM data/dfa.1.4.1")
-dfa.1.4.2 = readRDS("Data/DFA models FIM data/dfa.1.4.2")
-dfa.1.4.3 = readRDS("Data/DFA models FIM data/dfa.1.4.3")
-dfa.1.4.4 = readRDS("Data/DFA models FIM data/dfa.1.4.4")
+
+dfa.1.1.1 = readRDS("DFA models/dfa.1.1.1")
+dfa.1.1.2 = readRDS("DFA models/dfa.1.1.2")
+dfa.1.1.3 = readRDS("DFA models/dfa.1.1.3")
+#dfa.1.1.4 = readRDS("DFA models/dfa.1.1.4")
+dfa.1.2.1 = readRDS("DFA models/dfa.1.2.1")
+dfa.1.2.2 = readRDS("DFA models/dfa.1.2.2")
+dfa.1.2.3 = readRDS("DFA models/dfa.1.2.3")
+#dfa.1.2.4 = readRDS("DFA models/dfa.1.2.4")
+dfa.1.3.1 = readRDS("DFA models/dfa.1.3.1")
+dfa.1.3.2 = readRDS("DFA models/dfa.1.3.2")
+dfa.1.3.3 = readRDS("DFA models/dfa.1.3.3")
+#dfa.1.3.4 = readRDS("DFA models/dfa.1.3.4")
+dfa.1.4.1 = readRDS("DFA models/dfa.1.4.1")
+dfa.1.4.2 = readRDS("DFA models/dfa.1.4.2")
+dfa.1.4.3 = readRDS("DFA models/dfa.1.4.3")
+#dfa.1.4.4 = readRDS("DFA models/dfa.1.4.4")
+dfa.1.5.1 = readRDS("DFA models/dfa.1.5.1")
+dfa.1.5.2 = readRDS("DFA models/dfa.1.5.2")
 
 
 
@@ -720,9 +722,9 @@ dfa.1.4.4 = readRDS("Data/DFA models FIM data/dfa.1.4.4")
 
 #We will use AICc to determine which is the best model
 
-AIC.1 = c(dfa.1.1.1$AICc, dfa.1.1.2$AICc, dfa.1.1.3$AICc, dfa.1.1.4$AICc, dfa.1.2.1$AICc, dfa.1.2.2$AICc, dfa.1.2.3$AICc, dfa.1.2.4$AICc, dfa.1.3.1$AICc, dfa.1.3.2$AICc, dfa.1.3.3$AICc, dfa.1.3.4$AICc, dfa.1.4.1$AICc, dfa.1.4.2$AICc, dfa.1.4.3$AICc, dfa.1.4.4$AICc, dfa.1.5.1$AICc, dfa.1.5.2$AICc)
+#AIC.1 = c(dfa.1.1.1$AICc, dfa.1.1.2$AICc, dfa.1.1.3$AICc, dfa.1.1.4$AICc, dfa.1.2.1$AICc, dfa.1.2.2$AICc, dfa.1.2.3$AICc, dfa.1.2.4$AICc, dfa.1.3.1$AICc, dfa.1.3.2$AICc, dfa.1.3.3$AICc, dfa.1.3.4$AICc, dfa.1.4.1$AICc, dfa.1.4.2$AICc, dfa.1.4.3$AICc, dfa.1.4.4$AICc, dfa.1.5.1$AICc, dfa.1.5.2$AICc)
 
-#AIC.1 = c(dfa.1.1.1$AICc, dfa.1.2.1$AICc, dfa.1.3.1$AICc, dfa.1.4.1$AICc)
+AIC.1 = c(dfa.1.1.1$AICc, dfa.1.1.2$AICc, dfa.1.1.3$AICc, dfa.1.2.1$AICc, dfa.1.2.2$AICc, dfa.1.2.3$AICc, dfa.1.3.1$AICc, dfa.1.3.2$AICc, dfa.1.3.3$AICc, dfa.1.4.1$AICc, dfa.1.4.2$AICc, dfa.1.4.3$AICc, dfa.1.5.1$AICc, dfa.1.5.2$AICc)
 
 delAIC <- AIC.1 - min(AIC.1)
 relLik <- exp(-0.5 * delAIC)
@@ -730,7 +732,7 @@ aicweight <- relLik/sum(relLik)
 #And this leads to our model weights table:
 
 aic.table <- data.frame(AICc = AIC.1, delAIC = delAIC, relLik = relLik, weight = aicweight)
-rownames(aic.table) <- c("1 CT, d&e", "1 CT d&u", "1 CT, ev", "1 CT, unc", "2 CT, d&e", "2 CT d&u", "2 CT, ev", "2 CT, unc", "3 CT, d&e", "3 CT d&u", "3 CT, ev", "3 CT, unc", "4 CT, d&e", "4 CT d&u", "4 CT, ev", "4 CT, unc","5 CT, d&e")
+rownames(aic.table) <- c("1 CT, d&e", "1 CT d&u", "1 CT, ev", "2 CT, d&e", "2 CT d&u", "2 CT, ev", "3 CT, d&e", "3 CT d&u", "3 CT, ev", "4 CT, d&e", "4 CT d&u", "4 CT, ev","5 CT, d&e","5 CT, d&u")
 #Here the table is printed using round() to limit the number of digits shown.
 
 round(aic.table, digits = 3)
