@@ -229,5 +229,55 @@ dev.off()
 
 
 
+#####
+#Prep MRIP data for DFA. We want to get multiple trendlines, one for each fleet, state, and fishing location combination
+
+##
+# Load MRIP effort data from online query tool #####################################
+##
+
+MRIP = read.csv("../../NOAA Data/PUBLIC/PAPER_Rec-fishing-trends/Raw/MRIP query_effort_81_21_GOM by state_by mode_by area.csv")
+summary(MRIP)
 
 
+MRIP$State = as.factor(MRIP$State)
+MRIP$Fishing.Mode = as.factor(MRIP$Fishing.Mode)
+MRIP$Fishing.Area = as.factor(MRIP$Fishing.Area)
+
+MRIP2=MRIP
+
+MRIP2$Fishing.Area2 = as.factor(MRIP2$Fishing.Area)
+levels(MRIP2$Fishing.Area2) = list("State" = c("OCEAN (<= 10 MI)", "OCEAN (<= 3 MI)"),
+                                   "Federal" = c("OCEAN (> 10 MI)", "OCEAN (> 3 MI)"), "Inland" = "INLAND")
+
+MRIP2$Fishing.Mode2 = as.factor(MRIP2$Fishing.Mode)
+levels(MRIP2$Fishing.Mode2) = list("Charter" = c("CHARTER BOAT", "PARTY/CHARTER BOAT"),
+                                   "Private" = "PRIVATE/RENTAL BOAT", "Shore" = "SHORE")
+
+#Remove data points with PSE > 50
+library(dplyr)
+MRIP2 = MRIP2 %>% 
+  filter(PSE < 50)
+
+summary(MRIP2)
+
+MRIP2$ID = paste(MRIP2$State, MRIP2$Fishing.Area2, MRIP2$Fishing.Mode2)
+MRIP2$ID = as.factor(MRIP2$ID)
+
+summary(MRIP2)
+levels(MRIP2$ID)
+
+
+MRIP4DFA = MRIP2[,c(2,6,10)]
+
+
+library(dplyr)
+
+MRIP4DFA2 = reshape(MRIP4DFA, idvar = "Year", timevar = "ID", direction = "wide")
+
+library(tidyr)
+MRIP4DFA2 = spread(MRIP4DFA, key = ID, value = Angler.Trips)  
+
+head(MRIP4DFA2)
+
+saveRDS(MRIP4DFA2, "Data outputs/MRIP4DFA.rds")
