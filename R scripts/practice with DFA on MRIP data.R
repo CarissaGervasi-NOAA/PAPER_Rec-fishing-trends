@@ -283,7 +283,7 @@ lines(1:nrow(dat), dfa.1.2.1$states[2,], type = 'l', col = 'blue' )
 
 dfa.1.2.2 = MARSS(dat.z, model=list(m=2, R="diagonal and unequal"), z.score=TRUE, form="dfa", control=cntl.list, silent=2); beep()  
 
-#abstol only
+#success!
 summary(dfa.1.2.2)
 MARSSparamCIs(dfa.1.2.2)
 
@@ -503,7 +503,7 @@ fit.mod = par.mat$Z  %*%  dfa.1.4.1$states
 sumResids = rowSums((dat.z - fit.mod)^2, na.rm=TRUE)
 sumObserved = rowSums(dat.z^2, na.rm=TRUE)
 FitRatio = sumResids / sumObserved
-mean(FitRatio) #0.3103533
+mean(FitRatio) #0.3103531
 
 ##Plot of common trends
 par(mfrow = c(1,1))
@@ -518,7 +518,7 @@ lines(1:nrow(dat), dfa.1.4.1$states[4,], type = 'l', col = 'red' )
 
 dfa.1.4.2 = MARSS(dat.z, model=list(m=4, R="diagonal and unequal"), z.score=TRUE, form="dfa", control=cntl.list, silent=2); beep()  
 
-#abstol only
+#abstol only - ran to 133,000 and no luck
 summary(dfa.1.4.2)
 MARSSparamCIs(dfa.1.4.2)
 
@@ -657,6 +657,125 @@ lines(1:nrow(dat), dfa.1.5.2$states[3,], type = 'l', col = 'green' )
 lines(1:nrow(dat), dfa.1.5.2$states[4,], type = 'l', col = 'red' )
 
 
+###  1.5.3
+
+dfa.1.5.3 = MARSS(dat.z, model=list(m=5, R="equalvarcov"), z.score=TRUE, form="dfa", control=cntl.list, silent=2); beep()  
+#converged!
+summary(dfa.1.5.3)
+MARSSparamCIs(dfa.1.5.3)
+
+##This gives predicted values for each aggregate group
+par.mat = coef(dfa.1.5.3, type = "matrix") 
+fit.mod = par.mat$Z  %*%  dfa.1.5.3$states  
+
+##Fit ratios
+sumResids = rowSums((dat.z - fit.mod)^2, na.rm=TRUE)
+sumObserved = rowSums(dat.z^2, na.rm=TRUE)
+FitRatio = sumResids / sumObserved
+mean(FitRatio) #0.2395143
+
+##Plot of common trends
+par(mfrow = c(1,1))
+plot(1:nrow(dat), dfa.1.5.3$states[1,], type = 'l' , ylim=c(-5,4))
+lines(1:nrow(dat), dfa.1.5.3$states[2,], type = 'l', col = 'blue' )
+lines(1:nrow(dat), dfa.1.5.3$states[3,], type = 'l', col = 'green' )
+lines(1:nrow(dat), dfa.1.5.3$states[4,], type = 'l', col = 'red' )
+lines(1:nrow(dat), dfa.1.5.3$states[5,], type = 'l', col = 'pink' )
+
+
+
+
+
+###
+### 1.6. Six Trends
+###
+
+
+
+
+###  1.6.1
+
+dfa.1.6.1 = MARSS(dat.z, model=list(m=6, R="diagonal and equal"), z.score=TRUE, form="dfa", control=cntl.list, silent=2); beep()  
+
+#success!
+summary(dfa.1.6.1)
+MARSSparamCIs(dfa.1.6.1)
+
+##This gives predicted values for each aggregate group
+par.mat = coef(dfa.1.6.1, type = "matrix") 
+fit.mod = par.mat$Z  %*%  dfa.1.6.1$states  
+
+##Fit ratios
+sumResids = rowSums((dat.z - fit.mod)^2, na.rm=TRUE)
+sumObserved = rowSums(dat.z^2, na.rm=TRUE)
+FitRatio = sumResids / sumObserved
+mean(FitRatio) #0.1904828
+
+##Plot of common trends
+par(mfrow = c(1,1))
+plot(1:nrow(dat), dfa.1.6.1$states[1,], type = 'l' , ylim=c(-5,4))
+lines(1:nrow(dat), dfa.1.6.1$states[2,], type = 'l', col = 'blue' )
+lines(1:nrow(dat), dfa.1.6.1$states[3,], type = 'l', col = 'green' )
+lines(1:nrow(dat), dfa.1.6.1$states[4,], type = 'l', col = 'red' )
+lines(1:nrow(dat), dfa.1.6.1$states[5,], type = 'l', col = 'pink' )
+lines(1:nrow(dat), dfa.1.6.1$states[6,], type = 'l', col = 'orange' )
+
+
+###  1.6.2
+
+dfa.1.6.2 = MARSS(dat.z, model=list(m=6, R="diagonal and unequal"), z.score=TRUE, form="dfa", control=cntl.list, silent=2); beep()  
+
+#?
+summary(dfa.1.6.2)
+MARSSparamCIs(dfa.1.6.2)
+
+##This gives predicted values for each aggregate group
+par.mat = coef(dfa.1.6.2, type = "matrix") 
+fit.mod = par.mat$Z  %*%  dfa.1.6.2$states  
+
+##Fit ratios
+sumResids = rowSums((dat.z - fit.mod)^2, na.rm=TRUE)
+sumObserved = rowSums(dat.z^2, na.rm=TRUE)
+FitRatio = sumResids / sumObserved
+mean(FitRatio) #0.381521
+
+##Plot of common trends
+par(mfrow = c(1,1))
+plot(1:nrow(dat), dfa.1.6.2$states[1,], type = 'l' , ylim=c(-5,4))
+lines(1:nrow(dat), dfa.1.6.2$states[2,], type = 'l', col = 'blue' )
+lines(1:nrow(dat), dfa.1.6.2$states[3,], type = 'l', col = 'green' )
+lines(1:nrow(dat), dfa.1.6.2$states[4,], type = 'l', col = 'red' )
+
+
+###  1.6.3
+
+dfa.1.6.3 = MARSS(dat.z, model=list(m=6, R="equalvarcov"), z.score=TRUE, form="dfa", control=cntl.list, silent=2); beep()  
+#?
+summary(dfa.1.6.3)
+MARSSparamCIs(dfa.1.6.3)
+
+##This gives predicted values for each aggregate group
+par.mat = coef(dfa.1.6.3, type = "matrix") 
+fit.mod = par.mat$Z  %*%  dfa.1.6.3$states  
+
+##Fit ratios
+sumResids = rowSums((dat.z - fit.mod)^2, na.rm=TRUE)
+sumObserved = rowSums(dat.z^2, na.rm=TRUE)
+FitRatio = sumResids / sumObserved
+mean(FitRatio) #0.3121077
+
+##Plot of common trends
+par(mfrow = c(1,1))
+plot(1:nrow(dat), dfa.1.6.3$states[1,], type = 'l' , ylim=c(-5,4))
+lines(1:nrow(dat), dfa.1.6.3$states[2,], type = 'l', col = 'blue' )
+lines(1:nrow(dat), dfa.1.6.3$states[3,], type = 'l', col = 'green' )
+lines(1:nrow(dat), dfa.1.6.3$states[4,], type = 'l', col = 'red' )
+
+
+
+
+
+
 ###
 ##
 # Save the models so we don't have to re-run
@@ -668,20 +787,21 @@ saveRDS(dfa.1.1.2, file = "DFA models/dfa.1.1.2") #good
 saveRDS(dfa.1.1.3, file = "DFA models/dfa.1.1.3") #good
 saveRDS(dfa.1.1.4, file = "DFA models/dfa.1.1.4") #no convergence
 saveRDS(dfa.1.2.1, file = "DFA models/dfa.1.2.1") #good
-saveRDS(dfa.1.2.2, file = "DFA models/dfa.1.2.2") #abstol only
+saveRDS(dfa.1.2.2, file = "DFA models/dfa.1.2.2") #good
 saveRDS(dfa.1.2.3, file = "DFA models/dfa.1.2.3") #good
 saveRDS(dfa.1.2.4, file = "DFA models/dfa.1.2.4") #no convergence
 saveRDS(dfa.1.3.1, file = "DFA models/dfa.1.3.1") #good
 saveRDS(dfa.1.3.2, file = "DFA models/dfa.1.3.2") #good
 saveRDS(dfa.1.3.3, file = "DFA models/dfa.1.3.3") #good
 saveRDS(dfa.1.3.4, file = "DFA models/dfa.1.3.4") #no convergence
-saveRDS(dfa.1.4.1, file = "DFA models/dfa.1.4.1") #abstol only
+saveRDS(dfa.1.4.1, file = "DFA models/dfa.1.4.1") #good
 saveRDS(dfa.1.4.2, file = "DFA models/dfa.1.4.2") #abstol only
 saveRDS(dfa.1.4.3, file = "DFA models/dfa.1.4.3") #abstol only
 saveRDS(dfa.1.4.4, file = "DFA models/dfa.1.4.4") #no convergence
 saveRDS(dfa.1.5.1, file = "DFA models/dfa.1.5.1") #good
 saveRDS(dfa.1.5.2, file = "DFA models/dfa.1.5.2") #abstol only
-
+saveRDS(dfa.1.5.3, file = "DFA models/dfa.1.5.3") #good
+saveRDS(dfa.1.6.1, file = "DFA models/dfa.1.6.1") #good
 
 
 ###
@@ -709,7 +829,8 @@ dfa.1.4.3 = readRDS("DFA models/dfa.1.4.3")
 #dfa.1.4.4 = readRDS("DFA models/dfa.1.4.4")
 dfa.1.5.1 = readRDS("DFA models/dfa.1.5.1")
 dfa.1.5.2 = readRDS("DFA models/dfa.1.5.2")
-
+dfa.1.5.3 = readRDS("DFA models/dfa.1.5.3")
+dfa.1.6.1 = readRDS("DFA models/dfa.1.6.1")
 
 
 
@@ -724,7 +845,7 @@ dfa.1.5.2 = readRDS("DFA models/dfa.1.5.2")
 
 #AIC.1 = c(dfa.1.1.1$AICc, dfa.1.1.2$AICc, dfa.1.1.3$AICc, dfa.1.1.4$AICc, dfa.1.2.1$AICc, dfa.1.2.2$AICc, dfa.1.2.3$AICc, dfa.1.2.4$AICc, dfa.1.3.1$AICc, dfa.1.3.2$AICc, dfa.1.3.3$AICc, dfa.1.3.4$AICc, dfa.1.4.1$AICc, dfa.1.4.2$AICc, dfa.1.4.3$AICc, dfa.1.4.4$AICc, dfa.1.5.1$AICc, dfa.1.5.2$AICc)
 
-AIC.1 = c(dfa.1.1.1$AICc, dfa.1.1.2$AICc, dfa.1.1.3$AICc, dfa.1.2.1$AICc, dfa.1.2.2$AICc, dfa.1.2.3$AICc, dfa.1.3.1$AICc, dfa.1.3.2$AICc, dfa.1.3.3$AICc, dfa.1.4.1$AICc, dfa.1.4.2$AICc, dfa.1.4.3$AICc, dfa.1.5.1$AICc, dfa.1.5.2$AICc)
+AIC.1 = c(dfa.1.1.1$AICc, dfa.1.1.2$AICc, dfa.1.1.3$AICc, dfa.1.2.1$AICc, dfa.1.2.2$AICc, dfa.1.2.3$AICc, dfa.1.3.1$AICc, dfa.1.3.2$AICc, dfa.1.3.3$AICc, dfa.1.4.1$AICc, dfa.1.4.2$AICc, dfa.1.4.3$AICc, dfa.1.5.1$AICc, dfa.1.5.2$AICc, dfa.1.5.3$AICc, dfa.1.6.1$AICc)
 
 delAIC <- AIC.1 - min(AIC.1)
 relLik <- exp(-0.5 * delAIC)
@@ -732,7 +853,7 @@ aicweight <- relLik/sum(relLik)
 #And this leads to our model weights table:
 
 aic.table <- data.frame(AICc = AIC.1, delAIC = delAIC, relLik = relLik, weight = aicweight)
-rownames(aic.table) <- c("1 CT, d&e", "1 CT d&u", "1 CT, ev", "2 CT, d&e", "2 CT d&u", "2 CT, ev", "3 CT, d&e", "3 CT d&u", "3 CT, ev", "4 CT, d&e", "4 CT d&u", "4 CT, ev","5 CT, d&e","5 CT, d&u")
+rownames(aic.table) <- c("1 CT, d&e", "1 CT d&u", "1 CT, ev", "2 CT, d&e", "2 CT d&u", "2 CT, ev", "3 CT, d&e", "3 CT d&u", "3 CT, ev", "4 CT, d&e", "4 CT d&u", "4 CT, ev","5 CT, d&e","5 CT, d&u","5 CT ev","6 CT d&e")
 #Here the table is printed using round() to limit the number of digits shown.
 
 round(aic.table, digits = 3)
@@ -777,7 +898,7 @@ round(aic.table, digits = 3)
 
 ##Plotting the common trends###
 
-bestdfa = dfa.1.3.1
+bestdfa = dfa.1.6.1
 
 #Common trends
 c.trends <- bestdfa$states
@@ -790,43 +911,61 @@ ct.LCI <- bestdfa$states - bestdfa$states.se *qnorm(1-0.05/2)
 par.mat = coef(bestdfa, type = "matrix") 
 fit.mod = par.mat$Z  %*%  bestdfa$states 
 
-par(mfrow=c(3,1))
+par(mfrow=c(3,2))
 
 #CT1
-plot(1:nrow(dat), c.trends[1,], type = 'l' , ylim = c(-6,4), main = 'Common Trend 1', xaxt = 'n', xlab = '', 
-     ylab = 'meanCPUE', font.lab=2, yaxt = 'n', lwd = 4)
-axis(1, at = c(0,5,10,15,20,25), labels = c('0','5', '10', '15', '20', '25'), font = 2, cex.axis = 0.8)
-axis(2, at = c(-8, -6, -4, -2, 0, 2, 4), labels = c('-8', '-6', '-4', '-2', '0', '2', '4'), las = 2, font = 2)
+plot(1:nrow(dat), c.trends[1,], type = 'l' , ylim = c(-6,6), main = 'Common Trend 1', xaxt = 'n', xlab = '', 
+     ylab = 'Effort', font.lab=2, yaxt = 'n', lwd = 4)
+axis(1, at = c(0,5,10,15,20,25,30,35,40), labels = c('1980','1985', '1990', '1995', '2000', '2005','2010','2015','2020'), font = 2, cex.axis = 0.8)
+axis(2, at = c(-8, -6, -4, -2, 0, 2, 4, 6), labels = c('-8', '-6', '-4', '-2', '0', '2', '4','6'), las = 2, font = 2)
 abline(h=0)
 lines(1:nrow(dat), ct.UCI[1,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
 lines(1:nrow(dat), ct.LCI[1,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
 
 #CT2
-plot(1:nrow(dat), c.trends[2,], type = 'l' , ylim = c(-6,4), main = 'Common Trend 2', xaxt = 'n', xlab = '', 
-     ylab = 'meanCPUE', font.lab=2, yaxt = 'n', lwd = 4)
-axis(1, at = c(0,5,10,15,20,25), labels = c('0','5', '10', '15', '20', '25'), font = 2, cex.axis = 0.8)
-axis(2, at = c(-8, -6, -4, -2, 0, 2, 4), labels = c('-8', '-6', '-4', '-2', '0', '2', '4'), las = 2, font = 2)
+plot(1:nrow(dat), c.trends[2,], type = 'l' , ylim = c(-6,6), main = 'Common Trend 2', xaxt = 'n', xlab = '', 
+     ylab = 'Effort', font.lab=2, yaxt = 'n', lwd = 4)
+axis(1, at = c(0,5,10,15,20,25,30,35,40), labels = c('1980','1985', '1990', '1995', '2000', '2005','2010','2015','2020'), font = 2, cex.axis = 0.8)
+axis(2, at = c(-8, -6, -4, -2, 0, 2, 4, 6), labels = c('-8', '-6', '-4', '-2', '0', '2', '4','6'), las = 2, font = 2)
 abline(h=0)
 lines(1:nrow(dat), ct.UCI[2,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
 lines(1:nrow(dat), ct.LCI[2,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
 
 #CT3
-plot(1:nrow(dat), c.trends[3,], type = 'l' , ylim = c(-8,4), main = 'Common Trend 3', xaxt = 'n', xlab = '', 
-     ylab = 'Carbon', font.lab=2, yaxt = 'n', lwd = 4)
-axis(1, at = c(0,5,10,15,20,25), labels = c('0','5', '10', '15', '20', '25'), font = 2, cex.axis = 0.8)
-axis(2, at = c(-8, -6, -4, -2, 0, 2, 4), labels = c('-8', '-6', '-4', '-2', '0', '2', '4'), las = 2, font = 2)
+plot(1:nrow(dat), c.trends[3,], type = 'l' , ylim = c(-8,6), main = 'Common Trend 3', xaxt = 'n', xlab = '', 
+     ylab = 'Effort', font.lab=2, yaxt = 'n', lwd = 4)
+axis(1, at = c(0,5,10,15,20,25,30,35,40), labels = c('1980','1985', '1990', '1995', '2000', '2005','2010','2015','2020'), font = 2, cex.axis = 0.8)
+axis(2, at = c(-8, -6, -4, -2, 0, 2, 4, 6), labels = c('-8', '-6', '-4', '-2', '0', '2', '4','6'), las = 2, font = 2)
 abline(h=0)
 lines(1:nrow(dat), ct.UCI[3,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
 lines(1:nrow(dat), ct.LCI[3,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
 
 #CT4
-plot(1:nrow(dat), c.trends[4,], type = 'l' , ylim = c(-8,4), main = 'Common Trend 3', xaxt = 'n', xlab = '', 
-     ylab = 'Carbon', font.lab=2, yaxt = 'n', lwd = 4)
-axis(1, at = c(0,5,10,15,20,25), labels = c('0','5', '10', '15', '20', '25'), font = 2, cex.axis = 0.8)
-axis(2, at = c(-8, -6, -4, -2, 0, 2, 4), labels = c('-8', '-6', '-4', '-2', '0', '2', '4'), las = 2, font = 2)
+plot(1:nrow(dat), c.trends[4,], type = 'l' , ylim = c(-8,6), main = 'Common Trend 4', xaxt = 'n', xlab = '', 
+     ylab = 'Effort', font.lab=2, yaxt = 'n', lwd = 4)
+axis(1, at = c(0,5,10,15,20,25,30,35,40), labels = c('1980','1985', '1990', '1995', '2000', '2005','2010','2015','2020'), font = 2, cex.axis = 0.8)
+axis(2, at = c(-8, -6, -4, -2, 0, 2, 4, 6), labels = c('-8', '-6', '-4', '-2', '0', '2', '4','6'), las = 2, font = 2)
 abline(h=0)
 lines(1:nrow(dat), ct.UCI[4,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
 lines(1:nrow(dat), ct.LCI[4,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
+
+#CT5
+plot(1:nrow(dat), c.trends[5,], type = 'l' , ylim = c(-8,6), main = 'Common Trend 5', xaxt = 'n', xlab = '', 
+     ylab = 'Effort', font.lab=2, yaxt = 'n', lwd = 4)
+axis(1, at = c(0,5,10,15,20,25,30,35,40), labels = c('1980','1985', '1990', '1995', '2000', '2005','2010','2015','2020'), font = 2, cex.axis = 0.8)
+axis(2, at = c(-8, -6, -4, -2, 0, 2, 4, 6), labels = c('-8', '-6', '-4', '-2', '0', '2', '4','6'), las = 2, font = 2)
+abline(h=0)
+lines(1:nrow(dat), ct.UCI[5,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
+lines(1:nrow(dat), ct.LCI[5,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
+
+#CT6
+plot(1:nrow(dat), c.trends[6,], type = 'l' , ylim = c(-8,6), main = 'Common Trend 6', xaxt = 'n', xlab = '', 
+     ylab = 'Effort', font.lab=2, yaxt = 'n', lwd = 4)
+axis(1, at = c(0,5,10,15,20,25,30,35,40), labels = c('1980','1985', '1990', '1995', '2000', '2005','2010','2015','2020'), font = 2, cex.axis = 0.8)
+axis(2, at = c(-8, -6, -4, -2, 0, 2, 4, 6), labels = c('-8', '-6', '-4', '-2', '0', '2', '4','6'), las = 2, font = 2)
+abline(h=0)
+lines(1:nrow(dat), ct.UCI[6,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
+lines(1:nrow(dat), ct.LCI[6,], type = 'l', lwd = 4, col = 'gray', lty = 3 )
 
 
 
@@ -859,13 +998,13 @@ t.z <- t(par.mat$Z)
 
 regions.1 <- 1:length(regions)
 minZ = 0.00
-m=4
+m=6
 ylims = c(-1.1*max(abs(change.1)), 1.1*max(abs(change.1)))
 par(mfrow=c(ceiling(m/2),2), mar=c(3,4,1.5,0.5), oma=c(0.4,1,1,1))
 par(mfrow = c(2,1))
 
 ##Common trend 1
-plot(c(1:ncol(dat1)), as.vector(change.1),
+plot(c(1:ncol(dat1)), as.vector(change.1[,1]),
      type="h", lwd=2, xlab="", ylab="", xaxt="n", ylim=ylims, xlim=c(0,ncol(dat1)+1), yaxt = 'n')
 axis(side = 2, at=c(-1, 0, 1, 2), labels = c('-1', '0', '1', '2'), font = 2, las = 2)
 abline(h=0, lwd=1.5, col="gray")
@@ -904,14 +1043,68 @@ axis(side = 2, at=c(-0.8, -0.4, 0, 0.4, 0.8), labels = c('-0.8', '-0.4', '0', '0
 abline(h=0, lwd=1.5, col="gray")
 abline(h=0.2, lty = 2, lwd = 2, col = 'gray')
 abline(h=-0.2, lty = 2, lwd = 2, col = 'gray')
-for(j in 1:19) {
+for(j in 1:ncol(dat1)) {
   
-  if(change.1[j,3] > minZ) {text(j, -0.05, fishes[j], srt=90, adj=1, cex=1, font = 2)}
-  if(change.1[j,3] < -minZ) {text(j, 0.05, fishes[j], srt=90, adj=0, cex=1 , font = 2)}
-  if(change.1[j,3] == minZ) {text(j, -0.05, fishes[j], srt=90, adj=1, cex=1 , font = 2)}
+  if(change.1[j,3] > minZ) {text(j, -0.05, regions[j], srt=90, adj=1, cex=1, font = 2)}
+  if(change.1[j,3] < -minZ) {text(j, 0.05, regions[j], srt=90, adj=0, cex=1 , font = 2)}
+  if(change.1[j,3] == minZ) {text(j, -0.05, regions[j], srt=90, adj=1, cex=1 , font = 2)}
   
 } # end j loop
 mtext(paste("Factor loadings on trend 3"),side=3,line=.5, font = 2)
+
+
+
+##Common trend 4  
+plot(c(1:ncol(dat1)), as.vector(change.1[,4]),
+     type="h", lwd=2, xlab="", ylab="", xaxt="n", ylim=ylims, xlim=c(0,ncol(dat1)+1), yaxt = 'n')
+axis(side = 2, at=c(-0.8, -0.4, 0, 0.4, 0.8), labels = c('-0.8', '-0.4', '0', '0.4', '0.8'), font = 2, las = 2)
+abline(h=0, lwd=1.5, col="gray")
+abline(h=0.2, lty = 2, lwd = 2, col = 'gray')
+abline(h=-0.2, lty = 2, lwd = 2, col = 'gray')
+for(j in 1:ncol(dat1)) {
+  
+  if(change.1[j,4] > minZ) {text(j, -0.05, regions[j], srt=90, adj=1, cex=1, font = 2)}
+  if(change.1[j,4] < -minZ) {text(j, 0.05, regions[j], srt=90, adj=0, cex=1 , font = 2)}
+  if(change.1[j,4] == minZ) {text(j, -0.05, regions[j], srt=90, adj=1, cex=1 , font = 2)}
+  
+} # end j loop
+mtext(paste("Factor loadings on trend 4"),side=3,line=.5, font = 2)
+
+
+
+##Common trend 5  
+plot(c(1:ncol(dat1)), as.vector(change.1[,5]),
+     type="h", lwd=2, xlab="", ylab="", xaxt="n", ylim=ylims, xlim=c(0,ncol(dat1)+1), yaxt = 'n')
+axis(side = 2, at=c(-0.8, -0.4, 0, 0.4, 0.8), labels = c('-0.8', '-0.4', '0', '0.4', '0.8'), font = 2, las = 2)
+abline(h=0, lwd=1.5, col="gray")
+abline(h=0.2, lty = 2, lwd = 2, col = 'gray')
+abline(h=-0.2, lty = 2, lwd = 2, col = 'gray')
+for(j in 1:ncol(dat1)) {
+  
+  if(change.1[j,5] > minZ) {text(j, -0.05, regions[j], srt=90, adj=1, cex=1, font = 2)}
+  if(change.1[j,5] < -minZ) {text(j, 0.05, regions[j], srt=90, adj=0, cex=1 , font = 2)}
+  if(change.1[j,5] == minZ) {text(j, -0.05, regions[j], srt=90, adj=1, cex=1 , font = 2)}
+  
+} # end j loop
+mtext(paste("Factor loadings on trend 5"),side=3,line=.5, font = 2)
+
+
+
+##Common trend 6  
+plot(c(1:ncol(dat1)), as.vector(change.1[,6]),
+     type="h", lwd=2, xlab="", ylab="", xaxt="n", ylim=ylims, xlim=c(0,ncol(dat1)+1), yaxt = 'n')
+axis(side = 2, at=c(-0.8, -0.4, 0, 0.4, 0.8), labels = c('-0.8', '-0.4', '0', '0.4', '0.8'), font = 2, las = 2)
+abline(h=0, lwd=1.5, col="gray")
+abline(h=0.2, lty = 2, lwd = 2, col = 'gray')
+abline(h=-0.2, lty = 2, lwd = 2, col = 'gray')
+for(j in 1:ncol(dat1)) {
+  
+  if(change.1[j,6] > minZ) {text(j, -0.05, regions[j], srt=90, adj=1, cex=1, font = 2)}
+  if(change.1[j,6] < -minZ) {text(j, 0.05, regions[j], srt=90, adj=0, cex=1 , font = 2)}
+  if(change.1[j,6] == minZ) {text(j, -0.05, regions[j], srt=90, adj=1, cex=1 , font = 2)}
+  
+} # end j loop
+mtext(paste("Factor loadings on trend 6"),side=3,line=.5, font = 2)
 
 
 
